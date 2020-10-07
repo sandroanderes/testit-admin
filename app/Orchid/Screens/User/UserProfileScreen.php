@@ -31,7 +31,7 @@ class UserProfileScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Allgemeine information';
+    public $description = 'Allgemeine Informationen';
 
     /**
      * @var User
@@ -62,16 +62,16 @@ class UserProfileScreen extends Screen
     public function commandBar(): array
     {
         return [
-            DropDown::make(__('Settings'))
+            DropDown::make(__('Einstellungen'))
                 ->icon('open')
                 ->list([
-                    ModalToggle::make(__('Change Password'))
+                    ModalToggle::make(__('Passwort ändern'))
                         ->icon('lock-open')
                         ->method('changePassword')
                         ->modal('password'),
                 ]),
 
-            Button::make(__('Save'))
+            Button::make(__('Speichern'))
                 ->icon('check')
                 ->method('save'),
         ];
@@ -88,25 +88,25 @@ class UserProfileScreen extends Screen
             Layout::modal('password', [
                 Layout::rows([
                     Password::make('old_password')
-                        ->placeholder(__('Enter the current password'))
+                        ->placeholder(__('Geben Sie das aktuelle Passwort ein'))
                         ->required()
-                        ->title(__('Old password'))
-                        ->help('This is your password set at the moment.'),
+                        ->title(__('Altes Passwort'))
+                        ->help('Dies ist Ihr derzeit festgelegtes Passwort.'),
 
                     Password::make('password')
-                        ->placeholder(__('Enter the password to be set'))
+                        ->placeholder(__('Geben Sie das neue Passwort ein'))
                         ->required()
-                        ->title(__('New password')),
+                        ->title(__('Neues Passwort')),
 
                     Password::make('password_confirmation')
-                        ->placeholder(__('Enter the password to be set'))
+                        ->placeholder(__('Geben Sie das neue Passwort erneut ein'))
                         ->required()
-                        ->title(__('Confirm new password'))
-                        ->help('A good password is at least 15 characters or at least 8 characters long, including a number and a lowercase letter.'),
+                        ->title(__('Neues Passwort bestätigen'))
+                        ->help('Sichere Passwörter sollten mindestens 10 Zeichen lang sein, aus Groß- und Kleinbuchstaben sowie Sonderzeichen bestehen und in keinem Wörterbuch zu finden sein oder mit Ihnen in Verbindung stehen.'),
                 ]),
             ])
-                ->title(__('Change Password'))
-                ->applyButton('Update password'),
+                ->title(__('Passwort ändern'))
+                ->applyButton('Passwort ändern'),
         ];
     }
 
@@ -124,7 +124,7 @@ class UserProfileScreen extends Screen
             ->fill($request->get('user'))
             ->save();
 
-        Toast::info(__('Profile updated.'));
+        Toast::info(__('Das Profil wurde aktualisiert.'));
     }
 
     /**
@@ -141,6 +141,6 @@ class UserProfileScreen extends Screen
             $user->password = Hash::make($request->get('password'));
         })->save();
 
-        Toast::info(__('Password changed.'));
+        Toast::info(__('Password wurde geändert.'));
     }
 }

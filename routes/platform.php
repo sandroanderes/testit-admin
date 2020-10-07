@@ -15,6 +15,8 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\Key\Overview;
+use App\Orchid\Screens\Key\Create;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -87,14 +89,13 @@ Route::screen('roles', RoleListScreen::class)
             ->push(__('Roles'), route('platform.systems.roles'));
     });
 
-// Example...
-Route::screen('dashboard', ExampleScreen::class)
-    ->name('platform.example')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.index')
-            ->push(__('Example screen'));
-    });
+// Platform > Key > Overview
+Route::screen('overview', Overview::class)
+    ->name('platform.key.overview');
+
+// Platform > Key > Create
+Route::screen('create', Create::class)
+    ->name('platform.key.create');
 
 // Example...
 Route::screen('example', ExampleScreen::class)

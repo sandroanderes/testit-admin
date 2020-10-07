@@ -33,12 +33,12 @@ class PlatformProvider extends OrchidServiceProvider
 
             ItemMenu::label('Übersicht')
                 ->icon('eye')
-                ->route('platform.example')
+                ->route('platform.key.overview')
                 ->title('Lizenzverwaltung'),
 
             ItemMenu::label('Schlüssel erstellen')
                 ->icon('key')
-                ->route('platform.example'),
+                ->route('platform.key.create'),
 
             /* ItemMenu::label('Dropdown menu')
                 ->slug('example-menu')
@@ -120,6 +120,14 @@ class PlatformProvider extends OrchidServiceProvider
                 ->active('platform.systems.*')
                 ->permission('platform.systems.index')
                 ->sort(1000),
+
+            /* ItemMenu::label(__('Allgemein'))
+                ->place('Auth')
+                ->icon('settings')
+                ->route('platform.systems.users')
+                ->permission('platform.systems.users')
+                ->sort(1000)
+                ->title(__('Allgemeine Einstellungen')), */
 
             ItemMenu::label(__('Users'))
                 ->place('Auth')
