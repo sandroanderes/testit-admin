@@ -26,21 +26,53 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
+            /* Dashboard */
             ItemMenu::label('Dashboard')
                 ->icon('speedometer')
                 ->route('platform.main')
                 ->title('Dashboard'),
 
-            ItemMenu::label('Übersicht')
+            /* Lizenzverwaltung */
+            ItemMenu::label('Produktlizenzen')
                 ->icon('eye')
-                ->route('platform.key.overview')
+                ->route('platform.license.license')
                 ->title('Lizenzverwaltung'),
 
-            ItemMenu::label('Schlüssel erstellen')
-                ->icon('key')
-                ->route('platform.key.create'),
+            ItemMenu::label('Testlizenzen')
+                ->icon('eye')
+                ->route('platform.license.testlicense'),
 
-            /* ItemMenu::label('Dropdown menu')
+            /* Schlüsselverwaltung */
+            ItemMenu::label('Lizenzschlüssel')
+                ->icon('key')
+                ->route('platform.key.keys')
+                ->title('Schlüsselverwaltung'),
+
+            /* Einstellungen */
+            /* ItemMenu::label('Allgemein')
+                
+                ->icon('settings')
+                ->route('platform.example.fields'), */
+
+            ItemMenu::label('Benutzerverwaltung')
+                ->title('Einstellungen')
+                ->icon('friends')
+                ->route('platform.systems.users')
+                ->permission('platform.systems.users'),
+
+            ItemMenu::label('Rollenverwaltung')
+                ->icon('lock')
+                ->route('platform.systems.roles')
+                ->permission('platform.systems.roles'),
+
+            /* Webseite */
+            ItemMenu::label('Webseite anzeigen')
+                ->title('Webseite')
+                ->icon('globe')
+                ->url('https://test-it.ch'),
+
+/* 
+            ItemMenu::label('Dropdown menu')
                 ->slug('example-menu')
                 ->icon('key')
                 ->childs(),
@@ -51,24 +83,9 @@ class PlatformProvider extends OrchidServiceProvider
 
             ItemMenu::label('Sub element item 2')
                 ->place('example-menu')
-                ->icon('heart'), */
+                ->icon('heart'),
 
-            ItemMenu::label('Allgemein')
-                ->title('Einstellungen')
-                ->icon('settings')
-                ->route('platform.example.fields'),
-
-            ItemMenu::label('Benutzerverwaltung')
-                ->icon('friends')
-                ->route('platform.systems.users')
-                ->permission('platform.systems.users'),
-
-            ItemMenu::label('Rollenverwaltung')
-                ->icon('lock')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles'),
-
-            /* ItemMenu::label('Advanced Elements')
+            ItemMenu::label('Advanced Elements')
                 ->icon('briefcase')
                 ->route('platform.example.advanced'),
 
@@ -89,10 +106,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('grid')
                 ->route('platform.example.cards'), */
 
-            ItemMenu::label('Webseite anzeigen')
-                ->title('Webseite')
-                ->icon('globe')
-                ->url('https://test-it.ch'),
+
         ];
     }
 

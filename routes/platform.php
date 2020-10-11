@@ -15,8 +15,10 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
-use App\Orchid\Screens\Key\Overview;
-use App\Orchid\Screens\Key\Create;
+use App\Orchid\Screens\License\LicenseListScreen;
+use App\Orchid\Screens\License\TestLicenseListScreen;
+use App\Orchid\Screens\Key\KeyEditScreen;
+use App\Orchid\Screens\Key\KeyListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -89,13 +91,25 @@ Route::screen('roles', RoleListScreen::class)
             ->push(__('Roles'), route('platform.systems.roles'));
     });
 
-// Platform > Key > Overview
-Route::screen('overview', Overview::class)
-    ->name('platform.key.overview');
+// Platform > License > Test License
+Route::screen('licenses', LicenseListScreen::class)
+    ->name('platform.license.license');
 
-// Platform > Key > Create
-Route::screen('create', Create::class)
-    ->name('platform.key.create');
+// Platform > License > Test License
+Route::screen('testlicenses', TestLicenseListScreen::class)
+    ->name('platform.license.testlicense');
+
+// Platform > Key > Keys
+Route::screen('keys', KeyListScreen::class)
+    ->name('platform.key.keys');
+
+// Platform > Key > Keys > Key
+Route::screen('keys/{keys}/edit', KeyEditScreen::class)
+    ->name('platform.key.keys.edit');
+
+// Platform > Key > Keys > Create
+Route::screen('keys/create', KeyEditScreen::class)
+    ->name('platform.key.keys.create');
 
 // Example...
 Route::screen('example', ExampleScreen::class)
