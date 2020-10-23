@@ -39,6 +39,10 @@ class KeyListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (LicenseKey $key) {
                     return $key->license_key;
+                })
+                ->render(function (LicenseKey $key) {
+                    return Link::make($key->license_key)
+                    ->route('platform.key.keys.edit', $key->id);
                 }),
 
 
@@ -49,11 +53,11 @@ class KeyListLayout extends Table
                     return $key->product;
                 }),
 
-            TD::set('created', __('Erstelldatum'))
+            TD::set('created_at', __('Erstelldatum'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (LicenseKey $key) {
-                    return date('d.m.Y H:i', strtotime($key->created));
+                    return date('d.m.Y H:i', strtotime($key->created_at));
                 }),
 
             TD::set('id', 'Bearbeiten')
@@ -64,11 +68,6 @@ class KeyListLayout extends Table
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
-
-                            Link::make(__('Bearbeiten'))
-                                ->route('platform.key.keys.edit', $key->id)
-                                ->icon('pencil'),
-
                             Button::make(__('Löschen'))
                                 ->method('remove')
                                 ->confirm(__('Sind Sie sicher, dass Sie diesen Schlüssel löschen möchten?'))

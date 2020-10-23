@@ -7,9 +7,9 @@ namespace App\Orchid\Layouts\Key;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Select;
-use Orchid\Support\Color;
+use Orchid\Support\Facades\Layout;
 
-class KeyEditLayout extends Rows
+class KeyCreateLayout extends Rows
 {
     /**
      * Views.
@@ -24,21 +24,15 @@ class KeyEditLayout extends Rows
                 ->max(50)
                 /* ->required() */
                 ->title(__('Lizenzschlüssel'))
-                ->disabled(),
+                ->placeholder(__('VQCRC-J4GTW-T8XQW-RX6QG-4HVG4')),
 
             Select::make('product')
-                ->title('Produktname')
-                ->required()
-                ->options([
-                    'testit-lab'   => 'Test it lab',
-                    'testit-field' => 'Test it field',
-                ])
-                ->disabled(),
-            Input::make('created_at')
-                ->type('text')
-                ->max(50)
-                ->title(__('Erstelldatum'))
-                ->disabled(),
+                    ->title('Produktname')
+                    ->required()
+                    ->options([
+                        'testit-lab'   => 'Test it lab',
+                        'testit-field' => 'Test it field',
+                    ]),
         ];
     }
 }

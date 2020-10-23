@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens;
 
+use App\Orchid\Layouts\License\DashLicenseListLayout;
+use App\Orchid\Layouts\License\DashTestLicenseListLayout;
+use App\Orchid\Layouts\Key\KeyFiltersLayout;
+use App\Models\TestLicense;
 use Orchid\Screen\Actions\Link;
+use App\Models\License;
 use Orchid\Screen\Screen;
 use App\Orchid\Layouts\Examples\MetricsExample;
 use Orchid\Support\Facades\Layout;
+
 
 class PlatformScreen extends Screen
 {
@@ -34,12 +40,23 @@ class PlatformScreen extends Screen
     {
         return [
             'metrics' => [
-                ['keyValue' => number_format(6851, 0), 'keyDiff' => 10.08],
-                ['keyValue' => number_format(24668, 0), 'keyDiff' => -30.76],
-                ['keyValue' => number_format(65661, 2), 'keyDiff' => 3.84],
-                ['keyValue' => number_format(10000, 0), 'keyDiff' => -169.54],
-                ['keyValue' => number_format(1454887.12, 2), 'keyDiff' => 0.2],
+                ['keyValue' => number_format(6851, 0)],
+                ['keyValue' => number_format(24668, 0)],
+                ['keyValue' => number_format(65661, 2)],
+                ['keyValue' => number_format(10000, 0)],
+                ['keyValue' => number_format(1454887.12, 2)],
             ],
+            'licenses' => License::query()
+                ->filters()
+                ->filtersApplySelection(KeyFiltersLayout::class)
+                ->defaultSort('lid', 'asc')
+                ->paginate(),
+            'test_licenses' => TestLicense::query()
+                ->filters()
+                ->filtersApplySelection(KeyFiltersLayout::class)
+                ->defaultSort('tlid', 'asc')
+                ->paginate(),
+                
         ];
     }
 
@@ -70,7 +87,10 @@ class PlatformScreen extends Screen
     {
         return [
             MetricsExample::class,
-            Layout::view('main.dashboard'),
+            Layout::columns([
+                DashLicenseListLayout::class,
+                DashTestLicenseListLayout::class,
+            ]),
         ];
     }
 }

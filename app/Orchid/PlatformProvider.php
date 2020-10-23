@@ -48,12 +48,6 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.key.keys')
                 ->title('Schlüsselverwaltung'),
 
-            /* Einstellungen */
-            /* ItemMenu::label('Allgemein')
-                
-                ->icon('settings')
-                ->route('platform.example.fields'), */
-
             ItemMenu::label('Benutzerverwaltung')
                 ->title('Einstellungen')
                 ->icon('friends')
@@ -71,7 +65,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('globe')
                 ->url('https://test-it.ch'),
 
-/* 
+
             ItemMenu::label('Dropdown menu')
                 ->slug('example-menu')
                 ->icon('key')
@@ -104,7 +98,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             ItemMenu::label('Cards')
                 ->icon('grid')
-                ->route('platform.example.cards'), */
+                ->route('platform.example.cards'),
 
 
         ];

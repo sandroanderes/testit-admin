@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\Key;
 
-use App\Orchid\Layouts\Key\KeyEditLayout;
+use App\Orchid\Layouts\Key\KeyCreateLayout;
+use Illuminate\Http\Request;
 use App\Models\LicenseKey;
+use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
-class KeyEditScreen extends Screen
+class KeyCreateScreen extends Screen
 {
     /**
      * Display header name.
@@ -25,9 +27,9 @@ class KeyEditScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Details zur ausgewählten Lizenz';
+    public $description = 'Neue Lizenz erstellen';
 
-    /**
+    /* *
      * @var string
      */
     public $permission = 'platform.systems.index';
@@ -35,19 +37,13 @@ class KeyEditScreen extends Screen
     /**
      * Query data.
      *
-     * @param LicenseKey $key
+     * @param User $user
      *
      * @return array
      */
-    public function query(LicenseKey $key): array
+    public function query(User $user): array
     {
-        /* $key->load(['roles']); */
-
-        return [
-            'license_key'       => $key->license_key,
-            'product'       => $key->product,
-            'created_at'       => $key->created_at,
-        ];
+        return [];
     }
 
     /**
@@ -58,13 +54,13 @@ class KeyEditScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make(__('Löschen'))
-                ->icon('trash')
-                ->confirm('Sind Sie sicher, dass Sie diesen Schlüssel löschen möchten?')
-                ->method('remove'),
+            Button::make(__('Speichern'))
+                ->icon('check')
+                ->method('save'),
 
             Button::make(__('Abbrechen'))
                 ->icon('left')
+                ->confirm('Sind Sie sicher, dass Sie diesen Vorgang abbrechen möchten?')
                 ->method('cancel'),
         ];
     }
@@ -75,22 +71,28 @@ class KeyEditScreen extends Screen
     public function layout(): array
     {
         return [
-            KeyEditLayout::class,
+            KeyCreateLayout::class,
         ];
     }
 
     /**
-     * @param LicenseKey $key
-     *
-     * @throws \Exception
+     * @param LicenseKey    $key
+     * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(LicenseKey $key)
+    public function save(LicenseKey $key, Request $request)
     {
-        $key->delete();
+        $request->validate([
+            'license_key' => 'required|unique:mysql2.license_keys|max:255|String',
+        ]);
 
-        Toast::info(__('Lizenz wurde entfernt!'));
+        $data = [
+            ['license_key' => $request->get('license_key'), 'product' => $request->get('product')],
+        ];
+        $key::insert($data);
+
+        Toast::info(__('Lizenz wurde gespeichert.'));
 
         return redirect()->route('platform.key.keys');
     }

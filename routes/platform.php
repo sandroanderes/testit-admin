@@ -18,6 +18,7 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\License\LicenseListScreen;
 use App\Orchid\Screens\License\TestLicenseListScreen;
 use App\Orchid\Screens\Key\KeyEditScreen;
+use App\Orchid\Screens\Key\KeyCreateScreen;
 use App\Orchid\Screens\Key\KeyListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -108,7 +109,7 @@ Route::screen('keys/{keys}/edit', KeyEditScreen::class)
     ->name('platform.key.keys.edit');
 
 // Platform > Key > Keys > Create
-Route::screen('keys/create', KeyEditScreen::class)
+Route::screen('keys/create', KeyCreateScreen::class)
     ->name('platform.key.keys.create');
 
 // Example...

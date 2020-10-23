@@ -11,7 +11,7 @@ class MetricsExample extends Metric
     /**
      * @var string
      */
-    protected $title = 'Metric Today';
+    protected $title = 'Aktuelle Statistiken';
 
     /**
      * @var string
@@ -22,10 +22,10 @@ class MetricsExample extends Metric
      * @var array
      */
     protected $labels = [
-        'Sales Today',
-        'Visitors Today',
-        'Total Earnings',
-        'Pending Orders',
-        'Total Revenue',
+        'Test it lab Lizenzen',
+        'Test it field Lizenzen',
+        'Total Produktlizenzen',
+        'Testlizenzen',
+        'Total alle Lizenzen',
     ];
 }

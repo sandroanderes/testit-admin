@@ -23,7 +23,11 @@ class LicenseKey extends Model
     protected $fillable = [
         'license_key',
         'product',
+        'created_at',
+        'updated_at',
     ];
+
+    public $timestamps = false;
 
     /**
      * The attributes for which you can use filters in url.
@@ -34,6 +38,8 @@ class LicenseKey extends Model
         'id',
         'license_key',
         'product',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -44,6 +50,7 @@ class LicenseKey extends Model
     protected $allowedSorts = [
         'id',
         'product',
-        'created',
+        'created_at',
+        'updated_at',
     ];
 }
