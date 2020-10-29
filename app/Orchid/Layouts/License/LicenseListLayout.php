@@ -8,8 +8,6 @@ use App\Models\License;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Actions\ModalToggle;
-use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -38,6 +36,10 @@ class LicenseListLayout extends Table
                 ->sort()
                 ->render(function (License $license) {
                     return $license->license_key;
+                })
+                ->render(function (License $license) {
+                    return Link::make($license->license_key)
+                    ->route('platform.key.keys.edit', $license->lid);
                 }),
 
 
@@ -73,6 +75,26 @@ class LicenseListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (License $license) {
                     return date('d.m.Y H:i', strtotime($license->created));
+                }),
+                TD::set('id', 'ID')
+                ->align(TD::ALIGN_CENTER)
+                ->cantHide()
+                ->render(function (License $license) {
+                    return DropDown::make()
+                        ->icon('options-vertical')
+                        ->list([
+                            Link::make(__('Edit'))
+                                ->route('platform.key.keys.edit', $license->lid)
+                                ->icon('pencil'),
+
+                            Button::make(__('Löschen'))
+                                ->method('remove')
+                                ->confirm(__('Sind Sie sicher, dass Sie diesen Schlüssel löschen möchten?'))
+                                ->parameters([
+                                    'lid' => $license->lid,
+                                ])
+                                ->icon('trash'),
+                        ]);
                 }),
         ];
     }

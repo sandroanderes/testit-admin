@@ -6,7 +6,7 @@ namespace App\Orchid\Screens\Key;
 
 use App\Orchid\Layouts\Key\KeyCreateLayout;
 use Illuminate\Http\Request;
-use App\Models\LicenseKey;
+use App\Models\License;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
@@ -39,11 +39,11 @@ class KeyCreateScreen extends Screen
     /**
      * Query data.
      *
-     * @param User $user
+     * @param License $license
      *
      * @return array
      */
-    public function query(User $user): array
+    public function query(License $license): array
     {
         return [];
     }
@@ -79,25 +79,30 @@ class KeyCreateScreen extends Screen
     }
 
     /**
-     * @param LicenseKey    $key
+     * @param License $license
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(LicenseKey $key, Request $request)
+    public function save(License $license, Request $request)
     {
         $request->validate([
-            'license_key' => 'required|unique:mysql2.license_keys|max:255|String',
+            'license_key' => 'required|unique:mysql2.licenses|max:255|String',
+            'name' => 'required|max:255|String',
+            'company' => 'required|max:255|String',
+            'instances' => 'required|max:255|Numeric',
+            'valid_until' => 'required|Date',
         ]);
+        
 
         $data = [
-            ['license_key' => $request->get('license_key'), 'product' => $request->get('product')],
+            ['license_key' => $request->input('license_key'), 'product' => $request->get('product'), 'name' => $request->get('name'), 'company' => $request->get('company'), 'instances' => $request->get('instances'), 'valid_until' => $request->get('valid_until')],
         ];
-        $key::insert($data);
+        $license::insert($data);
 
         Toast::info(__('Lizenz wurde gespeichert.'));
 
-        return redirect()->route('platform.key.keys');
+        return redirect()->route('platform.license.license');
     }
 
     /**
@@ -109,6 +114,6 @@ class KeyCreateScreen extends Screen
      */
     public function cancel()
     {
-        return redirect()->route('platform.key.keys');
+        return redirect()->route('platform.license.license');
     }
 }

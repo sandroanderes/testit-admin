@@ -92,13 +92,23 @@ Route::screen('roles', RoleListScreen::class)
             ->push(__('Roles'), route('platform.systems.roles'));
     });
 
-// Platform > License > Test License
+// Platform > License > License
 Route::screen('licenses', LicenseListScreen::class)
-    ->name('platform.license.license');
+    ->name('platform.license.license')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Produklizenzen'), route('platform.license.license'));
+    });
 
 // Platform > License > Test License
 Route::screen('testlicenses', TestLicenseListScreen::class)
-    ->name('platform.license.testlicense');
+    ->name('platform.license.testlicense')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Testlizenzen'), route('platform.license.testlicense'));
+    });
 
 // Platform > Key > Keys
 Route::screen('keys', KeyListScreen::class)
@@ -106,11 +116,21 @@ Route::screen('keys', KeyListScreen::class)
 
 // Platform > Key > Keys > Key
 Route::screen('keys/{keys}/edit', KeyEditScreen::class)
-    ->name('platform.key.keys.edit');
+    ->name('platform.key.keys.edit')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.license.license')
+            ->push(__('Bearbeiten'), route('platform.key.keys.create'));
+    });
 
 // Platform > Key > Keys > Create
 Route::screen('keys/create', KeyCreateScreen::class)
-    ->name('platform.key.keys.create');
+    ->name('platform.key.keys.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.license.license')
+            ->push(__('Erstellen'), route('platform.key.keys.create'));
+    });
 
 // Example...
 Route::screen('example', ExampleScreen::class)

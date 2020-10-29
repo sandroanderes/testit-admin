@@ -14,6 +14,7 @@ class License extends Model
 {
     use Notifiable, UserAccess, AsSource, Filterable, Chartable, HasFactory;
     protected $connection = 'mysql2';
+    protected $primaryKey = 'lid';
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +27,8 @@ class License extends Model
         'company',
         'product',
         'instances',
+        'valid_until',
+        'updated_at',
     ];
 
     /**
@@ -40,6 +43,7 @@ class License extends Model
         'company',
         'product',
         'instances',
+        'valid_until',
     ];
 
     /**
@@ -54,6 +58,7 @@ class License extends Model
         'company',
         'product',
         'instances',
+        'valid_until',
         'created',
     ];
 }

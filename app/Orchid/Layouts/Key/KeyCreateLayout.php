@@ -19,20 +19,35 @@ class KeyCreateLayout extends Rows
     public function fields(): array
     {
         return [
-            Input::make('license_key')
+            Select::make('product')
+                ->title('Produktname')
+                ->required()
+                ->options([
+                    'test-it-lab'   => 'Test it lab',
+                    'test-it-field' => 'Test it field',
+                ]),
+            Input::make('name')
                 ->type('text')
                 ->max(50)
                 /* ->required() */
-                ->title(__('Lizenzschlüssel'))
-                ->placeholder(__('VQCRC-J4GTW-T8XQW-RX6QG-4HVG4')),
-
-            Select::make('product')
-                    ->title('Produktname')
-                    ->required()
-                    ->options([
-                        'testit-lab'   => 'Test it lab',
-                        'testit-field' => 'Test it field',
-                    ]),
+                ->title(__('Vor- und Nachname'))
+                ->placeholder(__('Manuela Meister')),
+            Input::make('company')
+                ->type('text')
+                ->max(50)
+                /* ->required() */
+                ->title(__('Firma'))
+                ->placeholder(__('Muster AG')),
+            Input::make('instances')
+                ->type('number')
+                ->max(50)
+                /* ->required() */
+                ->title(__('Instanzen'))
+                ->placeholder(__('1')),
+            Input::make('valid_until')
+                ->type('date')
+                ->title('Gültig bis')
+                ->value('2021-01-01')
         ];
     }
 }

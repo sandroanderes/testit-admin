@@ -25,7 +25,7 @@ class TestLicenseListScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Verfügbare Testlizenzen';
+    public $description = 'Vergebene Testlizenzen';
 
     /**
      * Query data.
@@ -50,7 +50,11 @@ class TestLicenseListScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Button::make(__('Neue Testlizenz erstellen'))
+                ->icon('key')
+                ->method('createNew'),
+        ];
     }
 
     /**

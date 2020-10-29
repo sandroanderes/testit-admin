@@ -20,25 +20,35 @@ class KeyEditLayout extends Rows
     {
         return [
             Input::make('license_key')
-                ->type('text')
-                ->max(50)
-                /* ->required() */
-                ->title(__('Lizenzschlüssel'))
+                ->title('Lizenzschlüssel')
                 ->disabled(),
 
             Select::make('product')
                 ->title('Produktname')
                 ->required()
                 ->options([
-                    'testit-lab'   => 'Test it lab',
-                    'testit-field' => 'Test it field',
-                ])
-                ->disabled(),
-            Input::make('created_at')
+                    'test-it-lab'   => 'Test it lab',
+                    'test-it-field' => 'Test it field',
+                ]),
+            Input::make('name')
                 ->type('text')
+                ->max(255)
+                /* ->required() */
+                ->title(__('Vor- und Nachname')),
+            Input::make('company')
+                ->type('text')
+                ->max(255)
+                /* ->required() */
+                ->title(__('Firma')),
+            Input::make('instances')
+                ->type('number')
                 ->max(50)
-                ->title(__('Erstelldatum'))
-                ->disabled(),
+                /* ->required() */
+                ->title(__('Instanzen')),
+            Input::make('valid_until')
+                ->type('date')
+                ->title('Gültig bis')
+                ->value('2021-01-01')
         ];
     }
 }

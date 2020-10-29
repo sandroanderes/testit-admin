@@ -2,9 +2,11 @@
 
 namespace App\Orchid\Screens\License;
 
+use App\Orchid\Layouts\Key\KeyEditLayout;
 use App\Orchid\Layouts\Key\KeyFiltersLayout;
 use App\Orchid\Layouts\License\LicenseListLayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\License;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -25,7 +27,7 @@ class LicenseListScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Verfügbare (gekaufte) Produktlizenzen';
+    public $description = 'Vergebene Produktlizenzen';
 
     /**
      * Query data.
@@ -50,7 +52,11 @@ class LicenseListScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Button::make(__('Neue Produktlizenz erstellen'))
+                ->icon('key')
+                ->method('createNew'),
+        ];
     }
 
     /**
@@ -62,6 +68,25 @@ class LicenseListScreen extends Screen
     {
         return [
             LicenseListLayout::class,
+
+            Layout::modal('oneAsyncModal', [
+                KeyEditLayout::class,
+            ])->async('asyncGetKey'),
         ];
+    }
+
+    public function createNew()
+    {
+        return redirect()->route('platform.key.keys.create');
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function remove(Request $request)
+    {
+        DB::connection('mysql2')->table('licenses')->where('lid', '=', $request->get('lid'))->delete();
+
+        Toast::info(__('Lizenz wurde entfernt!'));
     }
 }

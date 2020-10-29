@@ -13,4 +13,5 @@ const mix = require('laravel-mix');
 
 mix
     .js('resources/js/dashboard.js', 'public/js')
+    .js('resources/js/keygen.js', 'public/js')
     .sass('resources/assets/sass/main.scss', 'public/css')

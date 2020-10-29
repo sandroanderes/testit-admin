@@ -43,9 +43,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.license.testlicense'),
 
             /* Schlüsselverwaltung */
-            ItemMenu::label('Lizenzschlüssel')
+            ItemMenu::label('Lizenzschlüssel erstellen')
                 ->icon('key')
-                ->route('platform.key.keys')
+                ->route('platform.key.keys.create')
                 ->title('Schlüsselverwaltung'),
 
             ItemMenu::label('Benutzerverwaltung')

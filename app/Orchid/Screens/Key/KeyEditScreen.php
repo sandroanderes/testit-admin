@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Key;
 
 use App\Orchid\Layouts\Key\KeyEditLayout;
-use App\Models\LicenseKey;
+use Illuminate\Http\Request;
+use App\Models\License;
+use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -39,14 +41,15 @@ class KeyEditScreen extends Screen
      *
      * @return array
      */
-    public function query(LicenseKey $key): array
+    public function query(License $license): array
     {
-        /* $key->load(['roles']); */
-
         return [
-            'license_key'       => $key->license_key,
-            'product'       => $key->product,
-            'created_at'       => $key->created_at,
+            'license_key'       => $license->license_key,
+            'product'           => $license->product,
+            'name'              => $license->name,
+            'company'           => $license->company,
+            'instances'         => $license->instances,
+            'created_at'        => $license->created_at,
         ];
     }
 
@@ -58,6 +61,11 @@ class KeyEditScreen extends Screen
     public function commandBar(): array
     {
         return [
+            Button::make(__('Speichern'))
+                ->icon('trash')
+                ->confirm('Schlüssel speichern?')
+                ->method('save'),
+
             Button::make(__('Löschen'))
                 ->icon('trash')
                 ->confirm('Sind Sie sicher, dass Sie diesen Schlüssel löschen möchten?')
@@ -80,23 +88,23 @@ class KeyEditScreen extends Screen
     }
 
     /**
-     * @param LicenseKey $key
+     * @param License $license
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(LicenseKey $key)
+    public function remove(License $license, Request $request)
     {
-        $key->delete();
+        DB::connection('mysql2')->table('licenses')->where('lid', '=', $license->lid)->delete();
 
         Toast::info(__('Lizenz wurde entfernt!'));
 
-        return redirect()->route('platform.key.keys');
+        return redirect()->route('platform.license.license');
     }
 
     /**
-     * @param LicenseKey $key
+     * @param License $license
      *
      * @throws \Exception
      *
@@ -104,6 +112,31 @@ class KeyEditScreen extends Screen
      */
     public function cancel()
     {
-        return redirect()->route('platform.key.keys');
+        return redirect()->route('platform.license.license');
+    }
+
+    /**
+     * @param License $license
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(License $license, Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255|String',
+            'company' => 'required|max:255|String',
+            'instances' => 'required|max:255|Numeric',
+            'valid_until' => 'required|Date',
+        ]);
+        
+        
+        $license
+            ->fill(['product' => $request->get('product'), 'name' => $request->get('name'), 'company' => $request->get('company'), 'instances' => $request->get('instances'), 'valid_until' => $request->get('valid_until')])
+            ->save();
+
+        Toast::info(__('Lizenz wurde gespeichert.'));
+
+        return redirect()->route('platform.license.license');
     }
 }
