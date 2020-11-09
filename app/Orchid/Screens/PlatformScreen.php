@@ -11,8 +11,10 @@ use App\Models\TestLicense;
 use Orchid\Screen\Actions\Link;
 use App\Models\License;
 use Orchid\Screen\Screen;
-use App\Orchid\Layouts\Examples\MetricsExample;
+use App\Orchid\Layouts\Dashboard\DashboardMetrics;
+use App\Orchid\Layouts\Dashboard\DashboardChartPie;
 use Orchid\Support\Facades\Layout;
+
 
 
 class PlatformScreen extends Screen
@@ -40,11 +42,18 @@ class PlatformScreen extends Screen
     {
         return [
             'metrics' => [
-                ['keyValue' => number_format(6851, 0)],
-                ['keyValue' => number_format(24668, 0)],
-                ['keyValue' => number_format(65661, 2)],
-                ['keyValue' => number_format(10000, 0)],
-                ['keyValue' => number_format(1454887.12, 2)],
+                ['keyValue' => number_format(License::query()->where('product', 'test-it-lab')->count(), 0)],
+                ['keyValue' => number_format(License::query()->where('product', 'test-it-field')->count(), 0)],
+                ['keyValue' => number_format(License::query()->count(), 0)],
+                ['keyValue' => number_format(TestLicense::query()->count(), 0)],
+                ['keyValue' => number_format(License::query()->count()+TestLicense::query()->count(), 0)],
+            ],
+            'charts' => [
+                [
+                    'name'   => 'Lizenzstatistiken',
+                    'values' => [License::query()->count(), TestLicense::query()->count()],
+                    'labels' => ['Produktlizenzen', 'Testlizenzen'],
+                ],
             ],
             'licenses' => License::query()
                 ->filters()
@@ -86,11 +95,18 @@ class PlatformScreen extends Screen
     public function layout(): array
     {
         return [
-            MetricsExample::class,
+            DashboardMetrics::class,
+            DashboardChartPie::class,
             Layout::columns([
                 DashLicenseListLayout::class,
                 DashTestLicenseListLayout::class,
             ]),
         ];
+    }
+
+    public function statistics()
+    {
+        $licenses = License::query()->count();
+        return $licenses;
     }
 }

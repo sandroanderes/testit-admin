@@ -65,7 +65,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('globe')
                 ->url('https://test-it.ch'),
 
-
+/* 
             ItemMenu::label('Dropdown menu')
                 ->slug('example-menu')
                 ->icon('key')
@@ -100,7 +100,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('grid')
                 ->route('platform.example.cards'),
 
-
+ */
         ];
     }
 

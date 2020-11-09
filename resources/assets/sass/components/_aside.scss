@@ -1,0 +1,33 @@
+/* .aside {
+    color: white !important;
+    background: $primary-color !important;
+    a{
+        color: white !important;
+    }
+    li p.hidden-folded.text-muted{
+        color: black !important;
+    }
+    #headerMenuCollapse{
+        span.text-ellipsis{
+            color: white !important;
+        }
+        span.text-muted{
+            color: black !important;
+        }
+    }
+    .dropdown-menu{
+        a{
+            color: black !important; 
+        }
+    }
+} */
+.aside {
+    a {
+        color: white !important;
+    }
+    .dropdown-menu{
+        a{
+            color: black !important; 
+        }
+    }
+}
