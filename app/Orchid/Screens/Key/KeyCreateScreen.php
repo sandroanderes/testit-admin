@@ -7,8 +7,6 @@ namespace App\Orchid\Screens\Key;
 use App\Orchid\Layouts\Key\KeyCreateLayout;
 use Illuminate\Http\Request;
 use App\Models\License;
-use Orchid\Platform\Dashboard;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -75,6 +73,7 @@ class KeyCreateScreen extends Screen
         return [
             Layout::view('main.licensekey'),
             KeyCreateLayout::class,
+            Layout::view('orchid.scripts'),
         ];
     }
 

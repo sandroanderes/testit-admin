@@ -17,3 +17,4 @@
     </div>
   </div>
 </div>
+<script type="text/javascript" src="{{ asset('js/keygen.js') }}"></script>

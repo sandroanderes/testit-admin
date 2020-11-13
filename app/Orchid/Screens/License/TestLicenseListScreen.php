@@ -51,9 +51,9 @@ class TestLicenseListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make(__('Neue Testlizenz erstellen'))
+            /* Button::make(__('Neue Testlizenz erstellen'))
                 ->icon('key')
-                ->method('createNew'),
+                ->method('createNew'), */
         ];
     }
 

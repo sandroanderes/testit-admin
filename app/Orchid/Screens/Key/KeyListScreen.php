@@ -54,7 +54,7 @@ class KeyListScreen extends Screen
         return [
             Button::make(__('Neue Lizenz generieren'))
                 ->icon('key')
-                ->method('createNew'),
+                ->href(route('platform.key.keys.create')),
         ];
     }
 
@@ -72,10 +72,5 @@ class KeyListScreen extends Screen
                 KeyEditLayout::class,
             ])->async('asyncGetKey'),
         ];
-    }
-
-    public function createNew()
-    {
-        return redirect()->route('platform.key.keys.create');
     }
 }

@@ -48,7 +48,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.key.keys.create')
                 ->title('Schlüsselverwaltung'),
 
-            ItemMenu::label('Benutzerverwaltung')
+            /* ItemMenu::label('Benutzerverwaltung')
                 ->title('Einstellungen')
                 ->icon('friends')
                 ->route('platform.systems.users')
@@ -57,13 +57,17 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Rollenverwaltung')
                 ->icon('lock')
                 ->route('platform.systems.roles')
-                ->permission('platform.systems.roles'),
+                ->permission('platform.systems.roles'), */
 
             /* Webseite */
             ItemMenu::label('Webseite anzeigen')
                 ->title('Webseite')
                 ->icon('globe')
                 ->url('https://test-it.ch'),
+
+            ItemMenu::label('Webseite login')
+                ->icon('login')
+                ->url('https://test-it.ch/login'),
 
 /* 
             ItemMenu::label('Dropdown menu')
@@ -110,7 +114,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerProfileMenu(): array
     {
         return [
-            ItemMenu::label('Profile')
+            ItemMenu::label('Profil')
                 ->route('platform.profile')
                 ->icon('user'),
         ];
@@ -151,7 +155,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles')
                 ->sort(1000)
-                ->title(__('A Role defines a set of tasks a user assigned the role is allowed to perform. ')),
+                ->title(__('Eine Rolle definiert eine Reihe von Aufgaben, die ein Benutzer, dem die Rolle zugewiesen wurde, ausführen darf. ')),
         ];
     }
 

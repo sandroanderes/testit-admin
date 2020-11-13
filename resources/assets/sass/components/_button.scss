@@ -1,5 +1,17 @@
-.btn.btn-primary{
-  color: #fff !important;;
-  background: $primary-color !important;;
-  border-color: $primary-color !important;
+button.btn.btn-primary {
+    color: white !important;
+    background: $primary-color !important;
+    border-color: $primary-color !important;
+
+    &:hover {
+        background: $primary-color-hover !important;
+        border-color: $primary-color-hover !important;
+    }
+
+    &:not([disabled]):not(.disabled).active,
+    &:not([disabled]):not(.disabled):active{
+        background: $primary-color-hover !important;
+        border-color: $primary-color-hover !important;
+    }
+
 }

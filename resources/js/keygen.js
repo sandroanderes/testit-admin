@@ -46,7 +46,6 @@
 
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
         var generate = document.querySelector("#generate"),
             output = document.querySelector("#field-license-key-66a27576c485363b0d587d1c659501755fe3deb8");
 
@@ -56,7 +55,5 @@
             output.value = productKey;
 
         }, false);
-
-    });
 
 })();
