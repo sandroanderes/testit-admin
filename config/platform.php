@@ -89,7 +89,7 @@ return [
 
     'resource' => [
         'stylesheets' => ['/css/main.css'],
-        'scripts'     => ['/js/dashboard.js','/js/keygen.js'],
+        'scripts'     => ['/js/dashboard.js'],
     ],
 
     /*

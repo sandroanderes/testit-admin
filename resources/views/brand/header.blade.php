@@ -1,12 +1,9 @@
 @push('head')
-    <link
-        href="/favicon.ico"
-        id="favicon"
-        rel="icon"
-    >
+<link href="/favicon.ico" id="favicon" rel="icon">
 @endpush
 
-<img src="/img/Logo_TestItClaim.svg" alt="Test it">
+<img src="/img/Logo_TestItClaim.svg" class="login" alt="Test it">
+
 <!-- <p class="h2 n-m font-thin v-center"> 
     <x-orchid-icon path="database"/>
 

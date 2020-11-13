@@ -1,8 +1,33 @@
-.form-signin.container{
-    img{
-        flex: 0 0 58.33333333%;
-        max-width: 58.33333333%;
-        padding-left: 15px;
-        padding-right: 15px;
+
+    div.form-signin.container {
+        img.login {
+            flex: 0 0 41.66666667%;
+            max-width: 41.66666667%;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+    }
+
+
+@media screen and (max-width: 768px) {
+    div.form-signin.container {
+        img.login {
+            flex: 0 0 58.33333333%;
+            max-width: 58.33333333%;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    div.form-signin.container {
+        img.login {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
     }
 }
